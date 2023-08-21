@@ -150,23 +150,28 @@ def zodgame(cookie_string):
     # Load cookie
     driver.get("https://zodgame.xyz/")
 
-    if cookie_string.startswith("cookie:"):
+    /*if cookie_string.startswith("cookie:"):
         cookie_string = cookie_string[len("cookie:"):]
     cookie_string = cookie_string.replace("/","%2")
     cookie_dict = [ 
         {"name" : x.split('=')[0].strip(), "value": x.split('=')[1].strip()} 
         for x in cookie_string.split(';')
-    ]
+    ]*/
+
+    
 
     driver.delete_all_cookies()
-    for cookie in cookie_dict:
-        if cookie["name"] in ["qhMq_2132_saltkey", "qhMq_2132_auth"]:
-            driver.add_cookie({
-                "domain": "zodgame.xyz",
-                "name": cookie["name"],
-                "value": cookie["value"],
-                "path": "/",
-            })
+    for cookie in cookie_string:
+        cookie_dict = {
+            'domain': 'zodgame.xyz',#这里是固定的每个网站都不同
+            'name': cookie.get('name'),
+            'value': cookie.get('value'),
+            "expires": cookie.get('value'),
+            'path': '/',
+            'httpOnly': False,
+            'HostOnly': False,
+            'Secure': False}
+        driver.add_cookie(cookie_dict)
     
     driver.get("https://zodgame.xyz/")
     
