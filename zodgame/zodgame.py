@@ -147,7 +147,6 @@ def zodgame(cookie_string):
     version = get_latest_driver_version()
     driver = uc.Chrome(version_main = version, options = options)
 
-    '''
     # Load cookie
     driver.get("https://zodgame.xyz/")
 
@@ -158,13 +157,11 @@ def zodgame(cookie_string):
         {"name" : x.split('=')[0].strip(), "value": x.split('=')[1].strip()} 
         for x in cookie_string.split(';')
     ]
-    '''
 
     
 
     driver.delete_all_cookies()
-    cookie_string = eval(cookie_string)
-    for cookie in cookie_string:
+    for cookie in cookie_dict:
         cookie_dict = {
             'domain': 'zodgame.xyz',#这里是固定的每个网站都不同
             'name': cookie.get('name'),
