@@ -163,6 +163,7 @@ def zodgame(cookie_string):
     
 
     driver.delete_all_cookies()
+    cookie_string = eval(cookie_string)
     for cookie in cookie_string:
         cookie_dict = {
             'domain': 'zodgame.xyz',#这里是固定的每个网站都不同
